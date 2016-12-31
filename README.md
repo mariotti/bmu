@@ -11,3 +11,5 @@ I have a better code on my machine but needs some cleanup. I just wanted to rese
 
 Coming back soon
 
+Firsts scripts are there..
+..mm.. docs asap too.
