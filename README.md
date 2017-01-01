@@ -71,3 +71,5 @@ homebrew version to create the index.
  - backmeup.locale.sh is a nice shortcut to locate -d "backupdb"
 
 
+Firsts scripts are there..
+..mm.. docs asap too.
