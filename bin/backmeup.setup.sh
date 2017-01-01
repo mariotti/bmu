@@ -28,7 +28,7 @@
 # - We are still at beta, and we require maximum but simple compatibility, more over
 #   we are not yet sure what are all the machine/OS/FS dependencies,
 #   this file at present contains also these dependencies as automated as possible
-#   they will be removed when we have a configure program.
+#   they will be removed when we have a configure and install program.
 #   Also the date format is implicit here
 #
 # LOCAL/USER DEFINED OPTIONS
