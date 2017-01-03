@@ -42,5 +42,7 @@ fi;
 #
 # INDEXING
 # Add Eventual changed files
-${CMDUPDATEDB} --output=${BMUDIRDBLOCATE}/.locate.db.${PRJDIR}.${mydate} --localpaths="${DIRBKUP}"  --netpaths="${DIRBKUP}"
+if [ -d ${DIRBACKUPS}/${PRJDIR} ]; then
+    ${CMDUPDATEDB} --output=${BMUDIRDBLOCATE}/.locate.db.${PRJDIR}.${mydate} --localpaths="${DIRBKUP}"  --netpaths="${DIRBKUP}"
+fi
 #
