@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/mariotti/bmu.png?label=ready&title=Ready)](https://waffle.io/mariotti/bmu)
 # WARNING this code is at GAMMA stage
 
 Wrong settings can ovewrite your data.
