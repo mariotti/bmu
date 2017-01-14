@@ -23,6 +23,11 @@ BMU_PATH=${MY_PATH}
 #
 echo "You are configuring BMU to run from: ${BMU_PATH}"
 #
+echo "These directories and files will be created."
+echo " -    Synchronised backup directory: ${DIRRSYNC}"
+echo " - Historical data backup directory: ${DIRBACKUPS}"
+echo " -         Search Indexes Directory: ${BMUDIRDBLOCATE}"
+#
 mkdir ${DIRRSYNC}
 mkdir ${DIRBACKUPS}
 mkdir ${BMUDIRDBLOCATE}
