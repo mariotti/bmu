@@ -38,22 +38,39 @@
 DIRRSYNC="${HOME}/tmp/rsyncBackup"
 DIRBACKUPS="${DIRRSYNC}-BP"
 BMUDIRDBLOCATE="${DIRRSYNC}/.locate.dir"
+# Trasition: double variables existing
+BMU_DIRRSYNC="${HOME}/tmp/rsyncBackup"
+BMU_DIRBACKUPS="${DIRRSYNC}-BP"
+BMU_DIRDBLOCATE="${DIRRSYNC}/.locate.dir"
 #
 # System Options
 # --------------
 INDEXTYPE="locate"
 mydate=`date +%Y%m%d-%H%M%S`
 OPTRSYNC="-av --delete --backup" # --modify-window=1
+# Trasition: double variables existing
+BMU_INDEXTYPE="locate"
+BMU_mydate=`date +%Y%m%d-%H%M%S`
+BMU_OPTRSYNC="-av --delete --backup" # --modify-window=1
 #
 CMDUPDATEDB='updatedb'
 CMDLOCATE='locate'
 CMDFILTER='sed'
 UNAME=`uname`
+# Trasition: double variables existing
+BMU_CMDUPDATEDB='updatedb'
+BMU_CMDLOCATE='locate'
+BMU_CMDFILTER='sed'
+BMU_UNAME=`uname`
 #
 if [ "${UNAME}a" == "Darwina" ]; then
-CMDUPDATEDB='gupdatedb'
-CMDLOCATE='glocate'
-CMDFILTER='bbe -e'
+    CMDUPDATEDB='gupdatedb'
+    CMDLOCATE='glocate'
+    CMDFILTER='bbe -e'
+    # Trasition: double variables existing
+    BMU_CMDUPDATEDB='gupdatedb'
+    BMU_CMDLOCATE='glocate'
+    BMU_CMDFILTER='bbe -e'
 fi;
 #
 #
@@ -67,4 +84,7 @@ fi;
 # backup search when the backup disk is off-line.
 MAININDEXDIR=${DIRRSYNC}
 PARTINDEXDIR=${DIRRSYNC}/.locate.db.part
+# Trasition: double variables existing
+BMU_MAININDEXDIR=${DIRRSYNC}
+BMU_PARTINDEXDIR=${DIRRSYNC}/.locate.db.part
 
