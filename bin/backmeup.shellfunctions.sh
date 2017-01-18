@@ -9,6 +9,32 @@ bmuSetIndirectVar(){
     #echo "debug Ind Output >$tmpVarName< >$extVarName<"
     export $locVarName=$tmpVarName
 }
+
+# bmuPromptyN()
+bmuPromptyNexit() {
+    msg="$1"
+    echo "$msg"
+    read -e val
+    if [ -z $val ]; then
+	echo "Exiting ..."
+	exit 1
+    fi
+    #
+    case ${val} in
+	"n" | "N" | "no" | "NO" | "No")
+	    echo "Exiting ..."
+	    exit 1
+	    ;;
+	"y" | "Y" | "yes" | "YES" | "Yes")
+	    ;;
+	*)
+	    echo "Exiting ..."
+	    exit 1
+	    ;;
+    esac
+    return 0    
+}
+#
 # bmuPromptValue()
 # - Get user prompt using the read function
 #   Use it inside a while loop like:
@@ -23,7 +49,7 @@ bmuSetIndirectVar(){
 #   -f input must be an existing file
 #   -z input must be empty
 #   -n input cannot be empty (implemented as ! -z )
-
+#
 bmuPromptValue() {
     msg="$1"
     storevar="$2"
@@ -31,7 +57,7 @@ bmuPromptValue() {
     echo "$msg"
     read -e val
 
-    echo "debug Input >$1< >$2< >$3<"
+    #echo "debug Input >$1< >$2< >$3<"
     
     if [ -z $val ]; then
 	bmuSetIndirectVar "val" "$storevar"
@@ -88,4 +114,25 @@ bmuPromptValue_Example() {
     echo "You wrote: >${MYV}<"
     #
 }
-
+bmuPromptValue_ExampleYN() {
+    while bmuPromptValue "PShall I create the directory for you (y/N)?" "TMPYN" "n"
+    do
+	echo "Exiting configuration ..."
+	exit 1
+    done
+    case ${TMPYN} in
+	"n" | "N" | "no" | "NO" | "No")
+	    echo "Exiting configuration ..."
+	    exit 1
+	    ;;
+	"y" | "Y" | "yes" | "YES" | "Yes")
+	    export BMU_DIRRSYNC=${BMU_DIRRSYNC_TMP}
+	    echo "MKDIR ${BMU_DIRRSYNC}"
+	    break
+	    ;;
+	*)
+	    echo "Exiting configuration ..."
+	    exit 1
+	    ;;
+    esac
+}

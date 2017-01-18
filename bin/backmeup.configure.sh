@@ -14,6 +14,9 @@ if [ -z "$MY_PATH" ] ; then
 fi
 BMU_PATH=${MY_PATH}
 #
+# RollBack attempt
+BMU_CONFIGURE_ROLLBACK=""
+#
 # Source BMU functions
 # --------------------
 . backmeup.shellfunctions.sh 
@@ -41,28 +44,52 @@ do
 	echo "Empty input value: Exiting the configuration ..."
 	exit 1
     fi
-    while bmuPromptValue "Shall I create the directory for you (y/N)?" "TMPYN" "n"
-    do
-	echo "Exiting configuration ..."
-	exit 1
-    done
-    case ${TMPYN} in
-	"n" | "N" | "no" | "NO" | "No")
-	    echo "Exiting configuration ..."
-	    exit 1
-	    ;;
-	"y" | "Y" | "yes" | "YES" | "Yes")
-	    export BMU_DIRRSYNC=${BMU_DIRRSYNC_TMP}
-	    echo "MKDIR ${BMU_DIRRSYNC}"
-	    break
-	    ;;
-	*)
-	    echo "Exiting configuration ..."
-	    exit 1
-	    ;;
-    esac
+    bmuPromptyNexit "Shall I create the directory for you (y/N)?"
+    export BMU_DIRRSYNC=${BMU_DIRRSYNC_TMP}
+    echo "MKDIR ${BMU_DIRRSYNC} TO TEST"
+    BMU_CONFIGURE_ROLLBACK="${BMU_CONFIGURE_ROLLBACK} rm -rf ${BMU_DIRRSYNC};"
+    break
 done
-echo "debug SYNC directory: >${BMU_DIRRSYNC}< >${BMU_DIRRSYNC_TMP}<"
+#echo "debug SYNC directory: >${BMU_DIRRSYNC}< >${BMU_DIRRSYNC_TMP}<"
 BMU_DIRRSYNC=${BMU_DIRRSYNC_TMP}
 echo "SYNC Directory is: ${BMU_DIRRSYNC}"
+#
+# BMU_DIRBACKUPS
+BMU_DIRBACKUPS_TMP=${BMU_DIRBACKUPS}
+while bmuPromptValue "Please type the BackUp directory: (${BMU_DIRBACKUPS_TMP})" "BMU_DIRBACKUPS_TMP" "d"
+do
+    echo "not valid or not existing BackUp directory: ${BMU_DIRBACKUPS_TMP}"
+    if [ -z "$BMU_DIRBACKUPS_TMP" ] ; then
+	echo "Empty input value: Exiting the configuration ..."
+	exit 1
+    fi
+    bmuPromptyNexit "Shall I create the directory for you (y/N)?"
+    export BMU_DIRBACKUPS=${BMU_DIRBACKUPS_TMP}
+    echo "MKDIR ${BMU_DIRBACKUPS} TO TEST"
+    BMU_CONFIGURE_ROLLBACK="${BMU_CONFIGURE_ROLLBACK} rm -rf ${BMU_DIRBACKUPS};"
+    break
+done
+#echo "debug BackUp directory: >${BMU_DIRBACKUPS}< >${BMU_DIRBACKUPS_TMP}<"
+BMU_DIRBACKUPS=${BMU_DIRBACKUPS_TMP}
+echo "BackUp Directory is: ${BMU_DIRBACKUPS}"
+#
+#
+# BMU_DIRDBLOCATE
+BMU_DIRDBLOCATE_TMP=${BMU_DIRDBLOCATE}
+while bmuPromptValue "Please type the IndexDB directory: (${BMU_DIRDBLOCATE_TMP})" "BMU_DIRDBLOCATE_TMP" "d"
+do
+    echo "not valid or not existing IndexDB directory: ${BMU_DIRDBLOCATE_TMP}"
+    if [ -z "$BMU_DIRDBLOCATE_TMP" ] ; then
+	echo "Empty input value: Exiting the configuration ..."
+	exit 1
+    fi
+    bmuPromptyNexit "Shall I create the directory for you (y/N)?"
+    export BMU_DIRDBLOCATE=${BMU_DIRDBLOCATE_TMP}
+    echo "MKDIR ${BMU_DIRDBLOCATE} TO TEST"
+    BMU_CONFIGURE_ROLLBACK="${BMU_CONFIGURE_ROLLBACK} rm -rf ${BMU_DIRDBLOCATE};"
+    break
+done
+#echo "debug IndexDB directory: >${BMU_DIRDBLOCATE}< >${BMU_DIRDBLOCATE_TMP}<"
+BMU_DIRDBLOCATE=${BMU_DIRDBLOCATE_TMP}
+echo "IndexDB Directory is: ${BMU_DIRDBLOCATE}"
 #

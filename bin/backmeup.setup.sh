@@ -43,6 +43,13 @@ BMU_DIRRSYNC="${HOME}/tmp/rsyncBackup"
 BMU_DIRBACKUPS="${DIRRSYNC}-BP"
 BMU_DIRDBLOCATE="${DIRRSYNC}/.locate.dir"
 #
+# OS Options
+# ----------
+BMU_INSTPATH="/usr/local"
+BMU_INSTDIRNAME="/bmu"
+BMU_INSTDIR="${BMU_INSTPATH}${BMU_INSTDIRNAME}"
+BMU_LINKTO="/usr/local/bin/backmeup"
+#
 # System Options
 # --------------
 INDEXTYPE="locate"
