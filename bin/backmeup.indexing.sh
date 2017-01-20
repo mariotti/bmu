@@ -25,4 +25,5 @@ fi;
 #
 BMUPRJDATE=${1}
 #
-${CMDUPDATEDB} --output=${BMUDIRDBLOCATE}/.locate.db.${BMUPRJDATE} --localpaths="${DIRBKUP}"  --netpaths="${DIRBKUP}"
+# TOCHECK, was not working before
+##${BMU_CMDUPDATEDB} --output=${BMU_DIRDBLOCATE}/.locate.db.${BMUPRJDATE} --localpaths="${DIRBKUP}"  --netpaths="${DIRBKUP}"

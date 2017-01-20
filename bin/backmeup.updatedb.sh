@@ -39,8 +39,8 @@ BMU_PATH=${MY_PATH}
 # SETUP
 . ${BMU_PATH}/backmeup.setup.sh
 #
-${CMDUPDATEDB} --output=${BMUDIRDBLOCATE}/.locate.db --localpaths="${DIRRSYNC} ${DIRBACKUPS}"  --netpaths="${DIRRSYNC} ${DIRBACKUPS}"
+${BMU_CMDUPDATEDB} --output=${BMU_DIRDBLOCATE}/.locate.db --localpaths="${BMU_DIRRSYNC} ${BMU_DIRBACKUPS}"  --netpaths="${BMU_DIRRSYNC} ${BMU_DIRBACKUPS}"
 #
 # Remove old part indexes
 # This will have to check the dates, expecially for concurrency problems.
-rm -rf ${BMUDIRDBLOCATE}/.locate.db.*
+rm -rf ${BMU_DIRDBLOCATE}/.locate.db.*

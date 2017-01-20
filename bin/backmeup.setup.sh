@@ -56,6 +56,7 @@ INDEXTYPE="locate"
 mydate=`date +%Y%m%d-%H%M%S`
 OPTRSYNC="-av --delete --backup" # --modify-window=1
 # Trasition: double variables existing
+BMU_DATEFRMT="+%Y%m%d-%H%M%S"
 BMU_INDEXTYPE="locate"
 BMU_mydate=`date +%Y%m%d-%H%M%S`
 BMU_OPTRSYNC="-av --delete --backup" # --modify-window=1

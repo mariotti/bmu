@@ -1,5 +1,39 @@
 #! /bin/sh
 #
+#
+# bmuMkDir()
+# This function tries to create a directory and returns the success
+# of the command. Still buggy!!!
+# The default behavior is just exactly as mkdir, but you can
+# ask to force a positive response if the directory exists already
+# or check if the newly "forced" created directory is empty (The
+# still buggy part).
+bmuMkDir() {
+    newdir=$1
+    force=$2
+    case ${force} in
+	"y" | "Y" | "yes" | "YES" | "Yes")
+	    mkdir -p $newdir; return $?
+	    ;;
+	"empy" | "EMPTY" | "Empty")
+	    mkdir -p $newdir
+	    [ "$(ls -A $newdir)" ] && return 1 || return 0
+	    ;;
+	* | "n" | "N" | "no" | "NO" | "No")
+	    mkdir $newdir; return $?
+	    ;;
+    esac
+}
+#
+# bmuSetIndirectVar()
+# TO DOUBLE CHECK THIS COMMENT AND DEMO
+# This function is an helper to read indirect variables.
+# i.e. get the content of a variable whos name is saved
+# within an other variable. Like:
+# MYDIR="/tmp"
+# WHICHDIR="MYDIR"
+#	bmuSetIndirectVar "WHICHDIR" "$MYDIR"
+#
 bmuSetIndirectVar(){
     tmpVarName=$1
     locVarName=$1
@@ -7,10 +41,16 @@ bmuSetIndirectVar(){
     #echo "debug Ind Input >$1< >$2<"
     eval tmpVarName=\$$extVarName
     #echo "debug Ind Output >$tmpVarName< >$extVarName<"
-    export $locVarName=$tmpVarName
+    export $locVarName="${tmpVarName}"
 }
-
-# bmuPromptyN()
+#
+# bmuPromptyNexit()
+# This function accept a prompt message and exit if the
+# read string is anything different from a yes.
+# The yes is detected by a case like:
+#	"y" | "Y" | "yes" | "YES" | "Yes")
+# The code distinguish also a "yes" version but
+# at present it behaves like any other input.
 bmuPromptyNexit() {
     msg="$1"
     echo "$msg"
@@ -33,6 +73,10 @@ bmuPromptyNexit() {
 	    ;;
     esac
     return 0    
+}
+#
+bmuPromptyNexit_Example() {
+    bmuPromptyNexit "Shall I create the directory for you (y/N)?"
 }
 #
 # bmuPromptValue()
