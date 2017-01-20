@@ -4,6 +4,7 @@
 # -------------------
 # From: http://stackoverflow.com/questions/630372/determine-the-path-of-the-executing-bash-script
 # My version was a bit more "rude" ;)
+# But indeed this version might not detect symlinks.
 #
 MY_PATH="`dirname \"$0\"`"              # relative
 MY_PATH="`( cd \"$MY_PATH\" && pwd )`"  # absolutized and normalized
@@ -21,9 +22,6 @@ BMU_PATH=${MY_PATH}
 # SETUP
 . ${BMU_PATH}/backmeup.setup.sh
 #
-echo "You are configuring BMU to run from: ${BMU_PATH}"
+echo "You are installing BMU from: ${BMU_PATH}"
 #
-mkdir ${DIRRSYNC}
-mkdir ${DIRBACKUPS}
-mkdir ${BMUDIRDBLOCATE}
-#
+

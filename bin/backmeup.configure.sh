@@ -135,30 +135,30 @@ echo "Install on: ${BMU_INSTPATH}"
 #
 
 #
-# BMU_INSTDIRNAME
-BMU_INSTDIRNAME_TMP=${BMU_INSTDIRNAME}
-while bmuPromptValue "Please type the BMU install directory: (${BMU_INSTDIRNAME_TMP})" "BMU_INSTDIRNAME_TMP" "d"
+# BMU_INSTDIR
+BMU_INSTDIR_TMP=${BMU_INSTDIR}
+while bmuPromptValue "Please type the BMU install directory: (${BMU_INSTDIR_TMP})" "BMU_INSTDIR_TMP" "d"
 do
-    echo "not valid or not existing BMU install directory: ${BMU_INSTDIRNAME_TMP}"
-    if [ -z "$BMU_INSTDIRNAME_TMP" ] ; then
+    echo "not valid or not existing BMU install directory: ${BMU_INSTDIR_TMP}"
+    if [ -z "$BMU_INSTDIR_TMP" ] ; then
 	echo "Empty input value: Exiting the configuration ..."
 	exit 1
     fi
     bmuPromptyNexit "Shall I create the directory for you (y/N)?"
-    export BMU_INSTDIRNAME=${BMU_INSTDIRNAME_TMP}
-    echo "MKDIR ${BMU_INSTDIRNAME} TO TEST"
-    if bmuMkDir ${BMU_INSTDIRNAME} "empty"; then
-	BMU_CONFIGURE_ROLLBACK="${BMU_CONFIGURE_ROLLBACK} rm -rf ${BMU_INSTDIRNAME};"
+    export BMU_INSTDIR=${BMU_INSTDIR_TMP}
+    echo "MKDIR ${BMU_INSTDIR} TO TEST"
+    if bmuMkDir ${BMU_INSTDIR} "empty"; then
+	BMU_CONFIGURE_ROLLBACK="${BMU_CONFIGURE_ROLLBACK} rm -rf ${BMU_INSTDIR};"
 	break
     else
 	echo "cannot create the directory."
     fi
 done
-#echo "debug IndexDB directory: >${BMU_INSTDIRNAME}< >${BMU_INSTDIRNAME_TMP}<"
-BMU_INSTDIRNAME=${BMU_INSTDIRNAME_TMP}
-echo "BMU install Directory is: ${BMU_INSTDIRNAME}"
+#echo "debug IndexDB directory: >${BMU_INSTDIR}< >${BMU_INSTDIR_TMP}<"
+BMU_INSTDIR=${BMU_INSTDIR_TMP}
+echo "BMU install Directory is: ${BMU_INSTDIR}"
 #
-BMU_INSTDIR="${BMU_INSTPATH}${BMU_INSTDIRNAME}"
+BMU_INSTDIR="${BMU_INSTPATH}${BMU_INSTDIR}"
 #
 # Currently HARDCODED
 #
@@ -219,3 +219,4 @@ done
 #
 cp ${MY_PATH}/backmeup.setup.sh ${MY_PATH}/backmeup.setup.sh.old
 cp ${MY_PATH}/backmeup.setup.sh.new ${MY_PATH}/backmeup.setup.sh
+#

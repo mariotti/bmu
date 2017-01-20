@@ -44,3 +44,4 @@ ${BMU_CMDUPDATEDB} --output=${BMU_DIRDBLOCATE}/.locate.db --localpaths="${BMU_DI
 # Remove old part indexes
 # This will have to check the dates, expecially for concurrency problems.
 rm -rf ${BMU_DIRDBLOCATE}/.locate.db.*
+#
