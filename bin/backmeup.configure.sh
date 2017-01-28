@@ -19,10 +19,15 @@ BMU_CONFIGURE_ROLLBACK=""
 #
 # Source BMU functions
 # --------------------
-. backmeup.shellfunctions.sh 
+. ${BMU_PATH}/backmeup.shellfunctions.sh 
 #
 # SETUP
-. ${BMU_PATH}/backmeup.setup.sh
+if [ -f ${BMU_PATH}/backmeup.setup.sh ];
+then
+    . ${BMU_PATH}/backmeup.setup.sh
+else
+    . ${BMU_PATH}/backmeup.setup.sh.template
+fi    
 #
 echo "You are configuring BMU to run from: ${BMU_PATH}"
 #
@@ -211,7 +216,8 @@ for curvar in \
  BMU_CMDFILTER \
  BMU_UNAME \
  BMU_MAININDEXDIR \
- BMU_PARTINDEXDIR; do
+ BMU_PARTINDEXDIR;
+do
     val=""
     bmuSetIndirectVar "val" "$curvar"
     echo "${curvar}=$val" >> ${MY_PATH}/backmeup.setup.sh.new
