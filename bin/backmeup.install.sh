@@ -17,11 +17,22 @@ BMU_PATH=${MY_PATH}
 #
 # Source BMU functions
 # --------------------
-#. backmeup.shellfunctions.sh 
+. ${BMU_PATH}/backmeup.shellfunctions.sh 
 #
 # SETUP
-. ${BMU_PATH}/backmeup.setup.sh
+if [ -f ${BMU_PATH}/backmeup.setup.sh ];
+then
+    . ${BMU_PATH}/backmeup.setup.sh
+    echo "Read existing setup file."
+else
+    . ${BMU_PATH}/backmeup.setup.sh.template
+    echo "Installing a new system without existing configuration."
+fi
+echo ""
 #
 echo "You are installing BMU from: ${BMU_PATH}"
 #
-
+echo "${BMU_PATH}/backmeup.configure.sh will run and ask you few questions for installation."
+${BMU_PATH}/backmeup.configure.sh
+#
+cp -rp ${BMU_PATH}/ ${BMU_INSTDIR}/bin

@@ -17,6 +17,9 @@ BMU_PATH=${MY_PATH}
 # SETUP
 . ${BMU_PATH}/backmeup.setup.sh
 #
+# Set up the current date
+mydate=`date +%Y%m%d-%H%M%S`
+
 # Parsing the one option
 if [ -z $1 ]; then
     echo "please give a dir name."

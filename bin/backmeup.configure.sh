@@ -163,8 +163,6 @@ done
 BMU_INSTDIR=${BMU_INSTDIR_TMP}
 echo "BMU install Directory is: ${BMU_INSTDIR}"
 #
-BMU_INSTDIR="${BMU_INSTPATH}${BMU_INSTDIR}"
-#
 # Currently HARDCODED
 #
 # System Options
@@ -220,9 +218,12 @@ for curvar in \
 do
     val=""
     bmuSetIndirectVar "val" "$curvar"
-    echo "${curvar}=$val" >> ${MY_PATH}/backmeup.setup.sh.new
+    echo "${curvar}=\"$val\"" >> ${MY_PATH}/backmeup.setup.sh.new
 done
 #
-cp ${MY_PATH}/backmeup.setup.sh ${MY_PATH}/backmeup.setup.sh.old
+if [ -f ${MY_PATH}/backmeup.setup.sh ];
+then
+    cp ${MY_PATH}/backmeup.setup.sh ${MY_PATH}/backmeup.setup.sh.old
+fi
 cp ${MY_PATH}/backmeup.setup.sh.new ${MY_PATH}/backmeup.setup.sh
 #
