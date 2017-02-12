@@ -4,6 +4,7 @@
 # -------------------
 # From: http://stackoverflow.com/questions/630372/determine-the-path-of-the-executing-bash-script
 # My version was a bit more "rude" ;)
+# But indeed this version might not detect symlinks.
 #
 MY_PATH="`dirname \"$0\"`"              # relative
 MY_PATH="`( cd \"$MY_PATH\" && pwd )`"  # absolutized and normalized
@@ -16,14 +17,29 @@ BMU_PATH=${MY_PATH}
 #
 # Source BMU functions
 # --------------------
-#. backmeup.shellfunctions.sh 
+. ${BMU_PATH}/backmeup.shellfunctions.sh 
 #
 # SETUP
-. ${BMU_PATH}/backmeup.setup.sh
+if [ -f ${BMU_PATH}/backmeup.setup.sh ];
+then
+    . ${BMU_PATH}/backmeup.setup.sh
+    echo "Read existing setup file."
+else
+    . ${BMU_PATH}/backmeup.setup.sh.template
+    echo "Installing a new system without existing configuration."
+fi
+echo ""
 #
-echo "You are configuring BMU to run from: ${BMU_PATH}"
+echo "You are installing BMU from: ${BMU_PATH}"
 #
-mkdir ${DIRRSYNC}
-mkdir ${DIRBACKUPS}
-mkdir ${BMUDIRDBLOCATE}
+echo "${BMU_PATH}/backmeup.configure.sh will run and ask you few questions for installation."
+${BMU_PATH}/backmeup.configure.sh
 #
+# Copy command files
+cp -rp ${BMU_PATH}/ ${BMU_INSTDIR}/bin
+#
+# Create check file
+touch ${BMU_DIRRSYNC}/.bmumeta
+touch ${BMU_DIRBACKUPS}/.bmumeta
+#
+# END

@@ -17,32 +17,36 @@ BMU_PATH=${MY_PATH}
 # SETUP
 . ${BMU_PATH}/backmeup.setup.sh
 #
+# Set up the current date
+mydate=`date +%Y%m%d-%H%M%S`
+
 # Parsing the one option
 if [ -z $1 ]; then
     echo "please give a dir name."
     exit 1;
 fi;
 #Remove trailing / It creates a project directory
-TOBACKUP=`dirname $1`/`basename $1`
-PRJDIR=`basename ${1}`
+l_BMU_TOBACKUP=`dirname $1`/`basename $1`
+l_BMU_PRJDIR=`basename ${1}`
 
 #Define a rsync backup dir. It is new at each time we run up to mydate granularity
-DIRBKUP="${DIRBACKUPS}/${PRJDIR}/B-${mydate}"
-OPTBKUP=" --backup-dir=${DIRBKUP}"
+l_BMU_DIRBKUP="${BMU_DIRBACKUPS}/${l_BMU_PRJDIR}/B-${mydate}"
+l_BMU_OPTBKUP=" --backup-dir=${l_BMU_DIRBKUP}"
 #
-rsync ${OPTRSYNC} ${OPTBKUP} ${TOBACKUP} ${DIRRSYNC}/${PRJDIR}
+rsync ${BMU_OPTRSYNC} ${l_BMU_OPTBKUP} ${l_BMU_TOBACKUP} ${BMU_DIRRSYNC}/${l_BMU_PRJDIR}
 #
 # Create List Files
-if [ -d ${DIRBACKUPS}/${PRJDIR} ]; then
-  cd ${DIRBACKUPS}
-  find ${PRJDIR}/B-${mydate} > ${PRJDIR}/B-${mydate}.filelist
+if [ -d ${BMU_DIRBACKUPS}/${l_BMU_PRJDIR} ]; then
+  cd ${BMU_DIRBACKUPS}
+  find ${l_BMU_PRJDIR}/B-${mydate} > ${l_BMU_PRJDIR}/B-${mydate}.filelist
+  cd -
 fi;
 #
 ### END OF RSYNC JOB ###
 #
 # INDEXING
 # Add Eventual changed files
-if [ -d ${DIRBACKUPS}/${PRJDIR} ]; then
-    ${CMDUPDATEDB} --output=${BMUDIRDBLOCATE}/.locate.db.${PRJDIR}.${mydate} --localpaths="${DIRBKUP}"  --netpaths="${DIRBKUP}"
+if [ -d ${BMU_DIRBACKUPS}/${l_BMU_PRJDIR} ]; then
+    ${BMU_CMDUPDATEDB} --output=${BMU_DIRDBLOCATE}/.locate.db.${l_BMU_PRJDIR}.${mydate} --localpaths="${l_BMU_DIRBKUP}"  --netpaths="${l_BMU_DIRBKUP}"
 fi
 #
