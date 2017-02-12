@@ -9,11 +9,10 @@ BackMeUp - A tool to make backups for personal use. Also system wide and embedde
 
 ## How it currently works: we want to improve this
 
- - setup: Edit backmeup.setup.sh
  - install: run backmeup.install.sh
  - backup: run backmeup.sh as many times as you need or set it on a cron job
  - index: run backmeup.updatedb.sh any now and then or setup a nightly cron job
- - search: run backmeup.locate.sh <filename part>
+ - search: run backmeup.locate.sh
 
 ## Target Requirements
 
