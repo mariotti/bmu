@@ -84,7 +84,7 @@ do
     fi
     bmuPromptyNexit "Shall I create the directory for you (y/N)?"
     export BMU_DIRBACKUPS=${BMU_DIRBACKUPS_TMP}
-    echo "MKDIR ${BMU_DIRBACKUPS} TO TEST"
+    #echo "MKDIR ${BMU_DIRBACKUPS} TO TEST"
     if bmuMkDir ${BMU_DIRBACKUPS} "empty"; then
 	BMU_CONFIGURE_ROLLBACK="${BMU_CONFIGURE_ROLLBACK} rm -rf ${BMU_DIRBACKUPS};"
 	break

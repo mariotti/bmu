@@ -35,9 +35,9 @@
 # --------------------------
 # See also below INDEXING OPTIONS
 #
-DIRRSYNC="${HOME}/tmp/rsyncBackup"
-DIRBACKUPS="${DIRRSYNC}-BP"
-BMUDIRDBLOCATE="${DIRRSYNC}/.locate.dir"
+#DIRRSYNC="${HOME}/tmp/rsyncBackup"
+#DIRBACKUPS="${DIRRSYNC}-BP"
+#BMUDIRDBLOCATE="${DIRRSYNC}/.locate.dir"
 # Trasition: double variables existing
 BMU_DIRRSYNC="${HOME}/tmp/rsyncBackup"
 BMU_DIRBACKUPS="${DIRRSYNC}-BP"
@@ -53,7 +53,7 @@ BMU_LINKTO="/usr/local/bin/backmeup"
 #
 # System Options
 # --------------
-INDEXTYPE="locate"
+#INDEXTYPE="locate"
 mydate=`date +%Y%m%d-%H%M%S`
 OPTRSYNC="-av --delete --backup" # --modify-window=1
 # Trasition: double variables existing

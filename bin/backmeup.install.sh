@@ -35,4 +35,11 @@ echo "You are installing BMU from: ${BMU_PATH}"
 echo "${BMU_PATH}/backmeup.configure.sh will run and ask you few questions for installation."
 ${BMU_PATH}/backmeup.configure.sh
 #
+# Copy command files
 cp -rp ${BMU_PATH}/ ${BMU_INSTDIR}/bin
+#
+# Create check file
+touch ${BMU_DIRRSYNC}/.bmumeta
+touch ${BMU_DIRBACKUPS}/.bmumeta
+#
+# END
