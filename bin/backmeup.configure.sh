@@ -31,15 +31,6 @@ fi
 #
 echo "You are configuring BMU to run from: ${BMU_PATH}"
 #
-#echo "These directories and files will be created."
-#echo " -    Synchronised backup directory: ${DIRRSYNC}"
-#echo " - Historical data backup directory: ${DIRBACKUPS}"
-#echo " -         Search Indexes Directory: ${BMUDIRDBLOCATE}"
-#
-#mkdir ${DIRRSYNC}
-#mkdir ${DIRBACKUPS}
-#mkdir ${BMUDIRDBLOCATE}
-#
 #
 # LOCAL/USER DEFINED OPTIONS
 # --------------------------
@@ -61,7 +52,6 @@ do
     fi
     bmuPromptyNexit "Shall I create the directory for you (y/N)?"
     export BMU_DIRRSYNC=${BMU_DIRRSYNC_TMP}
-    echo "MKDIR ${BMU_DIRRSYNC} TO TEST"
     if bmuMkDir ${BMU_DIRRSYNC} "empty"; then
 	BMU_CONFIGURE_ROLLBACK="${BMU_CONFIGURE_ROLLBACK} rm -rf ${BMU_DIRRSYNC};"
 	break
@@ -84,7 +74,6 @@ do
     fi
     bmuPromptyNexit "Shall I create the directory for you (y/N)?"
     export BMU_DIRBACKUPS=${BMU_DIRBACKUPS_TMP}
-    #echo "MKDIR ${BMU_DIRBACKUPS} TO TEST"
     if bmuMkDir ${BMU_DIRBACKUPS} "empty"; then
 	BMU_CONFIGURE_ROLLBACK="${BMU_CONFIGURE_ROLLBACK} rm -rf ${BMU_DIRBACKUPS};"
 	break
@@ -108,7 +97,6 @@ do
     fi
     bmuPromptyNexit "Shall I create the directory for you (y/N)?"
     export BMU_DIRDBLOCATE=${BMU_DIRDBLOCATE_TMP}
-    echo "MKDIR ${BMU_DIRDBLOCATE} TO TEST"
     if bmuMkDir ${BMU_DIRDBLOCATE} "empty"; then
 	BMU_CONFIGURE_ROLLBACK="${BMU_CONFIGURE_ROLLBACK} rm -rf ${BMU_DIRDBLOCATE};"
 	break
@@ -151,7 +139,6 @@ do
     fi
     bmuPromptyNexit "Shall I create the directory for you (y/N)?"
     export BMU_INSTDIR=${BMU_INSTDIR_TMP}
-    echo "MKDIR ${BMU_INSTDIR} TO TEST"
     if bmuMkDir ${BMU_INSTDIR} "empty"; then
 	BMU_CONFIGURE_ROLLBACK="${BMU_CONFIGURE_ROLLBACK} rm -rf ${BMU_INSTDIR};"
 	break
@@ -176,10 +163,11 @@ BMU_CMDLOCATE='locate'
 BMU_CMDFILTER='sed'
 BMU_UNAME=`uname`
 #
-if [ "${UNAME}a" == "Darwina" ]; then
+if [ "${BMU_UNAME}a" == "Darwina" ]; then
     BMU_CMDUPDATEDB='gupdatedb'
     BMU_CMDLOCATE='glocate'
     BMU_CMDFILTER='bbe -e'
+    echo "MAC DARWIN detected: using gupdatedb, glocate and bbe"
 fi;
 #
 #
