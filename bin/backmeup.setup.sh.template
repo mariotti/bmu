@@ -36,8 +36,8 @@
 # See also below INDEXING OPTIONS
 #
 BMU_DIRRSYNC="${HOME}/tmp/rsyncBackup"
-BMU_DIRBACKUPS="${DIRRSYNC}-BP"
-BMU_DIRDBLOCATE="${DIRRSYNC}/.locate.dir"
+BMU_DIRBACKUPS="${BMU_DIRRSYNC}-BP"
+BMU_DIRDBLOCATE="${BMU_DIRRSYNC}/.locate.dir"
 #
 # OS Options
 # ----------
@@ -77,6 +77,6 @@ fi;
 #
 # The basic idea is that we can  have locally stored indexes for
 # backup search when the backup disk is off-line.
-BMU_MAININDEXDIR=${DIRRSYNC}
-BMU_PARTINDEXDIR=${DIRRSYNC}/.locate.db.part
+BMU_MAININDEXDIR=${BMU_DIRRSYNC}
+BMU_PARTINDEXDIR=${BMU_DIRRSYNC}/.locate.db.part
 
