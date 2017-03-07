@@ -38,6 +38,17 @@ ${BMU_PATH}/backmeup.configure.sh
 # Copy command files
 cp -rp ${BMU_PATH}/ ${BMU_INSTDIR}/bin
 #
+# Reread setup file
+if [ -f ${BMU_PATH}/backmeup.setup.sh ];
+then
+    . ${BMU_PATH}/backmeup.setup.sh
+    echo "Reread existing setup file. All fine"
+else
+    . ${BMU_PATH}/backmeup.setup.sh.template
+    echo "ERROR: Reading template. Something went wrong!"
+fi
+
+#
 # Create check file
 touch ${BMU_DIRRSYNC}/.bmumeta
 touch ${BMU_DIRBACKUPS}/.bmumeta
