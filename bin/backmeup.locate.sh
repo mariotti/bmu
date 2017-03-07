@@ -18,7 +18,8 @@ BMU_PATH=${MY_PATH}
 . ${BMU_PATH}/backmeup.setup.sh
 #
 #
-${BMU_CMDLOCATE} -d ${BMU_DIRDBLOCATE}/.locate.db ${@:1}
+${BMU_CMDLOCATE} -i -d ${BMU_DIRDBLOCATE}/.locate.db ${@:1}
+${BMU_CMDLOCATE} -i -d ${BMU_DIRDBLOCATE}/.locate.dbb ${@:1}
 #
 # NOTES
 #

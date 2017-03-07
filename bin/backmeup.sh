@@ -36,7 +36,7 @@ l_BMU_OPTBKUP=" --backup-dir=${l_BMU_DIRBKUP}"
 rsync ${BMU_OPTRSYNC} ${l_BMU_OPTBKUP} ${l_BMU_TOBACKUP} ${BMU_DIRRSYNC}/${l_BMU_PRJDIR}
 #
 # Create List Files
-if [ -d ${BMU_DIRBACKUPS}/${l_BMU_PRJDIR} ]; then
+if [ -d ${BMU_DIRBACKUPS}/${l_BMU_PRJDIR}/B-${mydate} ]; then
   cd ${BMU_DIRBACKUPS}
   find ${l_BMU_PRJDIR}/B-${mydate} > ${l_BMU_PRJDIR}/B-${mydate}.filelist
   cd -
@@ -46,7 +46,8 @@ fi;
 #
 # INDEXING
 # Add Eventual changed files
-if [ -d ${BMU_DIRBACKUPS}/${l_BMU_PRJDIR} ]; then
-    ${BMU_CMDUPDATEDB} --output=${BMU_DIRDBLOCATE}/.locate.db.${l_BMU_PRJDIR}.${mydate} --localpaths="${l_BMU_DIRBKUP}"  --netpaths="${l_BMU_DIRBKUP}"
+if [ -d ${BMU_DIRBACKUPS}/${l_BMU_PRJDIR}/B-${mydate} ]; then
+#    ${BMU_CMDUPDATEDB} --output=${BMU_DIRDBLOCATE}/.locate.db.${l_BMU_PRJDIR}.${mydate} --localpaths="${l_BMU_DIRBKUP}"  --netpaths="${l_BMU_DIRBKUP}"
+    ${BMU_CMDUPDATEDB} --output=${BMU_DIRDBLOCATE}/.locate.db.${l_BMU_PRJDIR}.${mydate} ${BMU_UPDBOPT}"${l_BMU_DIRBKUP}"
 fi
 #

@@ -25,8 +25,10 @@ BMU_CONFIGURE_ROLLBACK=""
 if [ -f ${BMU_PATH}/backmeup.setup.sh ];
 then
     . ${BMU_PATH}/backmeup.setup.sh
+    echo "Previous setup file. Using: ${BMU_PATH}/backmeup.setup.sh"
 else
     . ${BMU_PATH}/backmeup.setup.sh.template
+    echo "No previous setup file. Using template."
 fi    
 #
 echo "You are configuring BMU to run from: ${BMU_PATH}"
@@ -158,13 +160,15 @@ BMU_INDEXTYPE="locate"
 BMU_DATEFRMT="+%Y%m%d-%H%M%S"
 BMU_mydate=`date +%Y%m%d-%H%M%S`
 BMU_OPTRSYNC="-av --delete --backup" # --modify-window=1
-BMU_CMDUPDATEDB='updatedb'
+BMU_CMDUPDATEDB='updatedb -l 0'
+BMU_UPDBOPT='-U '
 BMU_CMDLOCATE='locate'
 BMU_CMDFILTER='sed'
 BMU_UNAME=`uname`
 #
 if [ "${BMU_UNAME}a" == "Darwina" ]; then
     BMU_CMDUPDATEDB='gupdatedb'
+    BMU_UPDBOPT='--localpaths='
     BMU_CMDLOCATE='glocate'
     BMU_CMDFILTER='bbe -e'
     echo "MAC DARWIN detected: using gupdatedb, glocate and bbe"
@@ -198,6 +202,7 @@ for curvar in \
  BMU_mydate \
  BMU_OPTRSYNC \
  BMU_CMDUPDATEDB \
+ BMU_UPDBOPT \
  BMU_CMDLOCATE \
  BMU_CMDFILTER \
  BMU_UNAME \

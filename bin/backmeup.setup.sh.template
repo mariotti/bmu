@@ -36,8 +36,8 @@
 # See also below INDEXING OPTIONS
 #
 BMU_DIRRSYNC="${HOME}/tmp/rsyncBackup"
-BMU_DIRBACKUPS="${DIRRSYNC}-BP"
-BMU_DIRDBLOCATE="${DIRRSYNC}/.locate.dir"
+BMU_DIRBACKUPS="${BMU_DIRRSYNC}-BP"
+BMU_DIRDBLOCATE="${BMU_DIRRSYNC}/.locate.dir"
 #
 # OS Options
 # ----------
@@ -57,13 +57,15 @@ BMU_INDEXTYPE="locate"
 BMU_mydate=`date +%Y%m%d-%H%M%S`
 BMU_OPTRSYNC="-av --delete --backup" # --modify-window=1
 #
-BMU_CMDUPDATEDB='updatedb'
+BMU_CMDUPDATEDB='updatedb -l 0'
+BMU_UPDBOPT='-U '
 BMU_CMDLOCATE='locate'
 BMU_CMDFILTER='sed'
 BMU_UNAME=`uname`
 #
 if [ "${UNAME}a" == "Darwina" ]; then
-    BMU_CMDUPDATEDB='gupdatedb'
+    BMU_CMDUPDATEDB='gupdatedb -l 0'
+    BMU_UPDBOPT='--localpaths='
     BMU_CMDLOCATE='glocate'
     BMU_CMDFILTER='bbe -e'
 fi;
@@ -77,6 +79,6 @@ fi;
 #
 # The basic idea is that we can  have locally stored indexes for
 # backup search when the backup disk is off-line.
-BMU_MAININDEXDIR=${DIRRSYNC}
-BMU_PARTINDEXDIR=${DIRRSYNC}/.locate.db.part
+BMU_MAININDEXDIR=${BMU_DIRRSYNC}
+BMU_PARTINDEXDIR=${BMU_DIRRSYNC}/.locate.db.part
 
