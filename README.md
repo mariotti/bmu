@@ -42,3 +42,12 @@ What I propose is something between a backup, a time machine and close to versio
  - A GUI
  - An archive facility to compress very old data which will still include an indexing/search facility
 
+# News
+
+## Tested on linux
+
+Finally I got back to my linux box and tested it!
+
+I realised the problem is not linux or mac but more gnu version or mlocate.
+
+This will need to create an other issue. gnu or m?
